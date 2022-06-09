@@ -56,54 +56,9 @@ function LoadSave(){
     }
     localStorage.setItem("redactleSavet",JSON.stringify(save));
     playerID = save.id.playerID;
-    fetchData(false, 'U2Nobml0emVsYmFuaw==');
-    // $.ajax({
-    //     type: "GET",
-    //     url: "/ses.php",
-    //     dataType:'text',
-    //     success: function(data){
-    //         startMetrics = JSON.parse(data);
-    //         token = startMetrics.token;
-    //         redactleIndex = startMetrics.redactleIndex;
-    //         yesterday = startMetrics.yesterday;
-    //         hidingZero = save.prefs.hidingZero;
-    //         hidingLog = save.prefs.hidingLog;
-    //         pluralizing = save.prefs.pluralizing;
-    //         gameWins = save.saveData.gameWins;
-    //         gameScores = save.saveData.gameScores;
-    //         gameAccuracy = save.saveData.gameAccuracy;
-    //         gameAnswers = save.saveData.gameAnswers;
-    //         var gameDelta = redactleIndex - save.saveData.gameWins.length;
-            
-    //         for (var i = 0; i < gameDelta; i++){
-    //             gameWins.push(0);
-    //             gameScores.push(0);
-    //             gameAccuracy.push(0);
-    //             gameAnswers.push('');
-    //         }
-    //         if(save.saveData.redactleIndex != redactleIndex){
-    //             save.saveData.redactleIndex = redactleIndex;
-    //             save.saveData.guessedWords = guessedWords;
-    //         } else{
-    //             guessedWords = save.saveData.guessedWords;
-    //         }
-    //         SaveProgress();
-    //         fetchData(false,startMetrics.article);
-    //     },complete: function(){
-    //         $.ajax({
-    //             type: "POST",
-    //             url: "/init.php",
-    //             dataType:'text',
-    //             data:{
-    //                 'playerID': playerID,
-    //                 'currentRedactle': redactleIndex,
-    //                 'token': token
-    //             },success: function(data){
-    //             }
-    //         })
-    //     }}
-    // );
-    
+    const urlParams = new URLSearchParams(window.location.search)
+    const articalTitle = urlParams.get('a') || 'U2Nobml0emVsYmFuaw==';
+    fetchData(false, articalTitle);
 }
 
 async function fetchData(retry, artStr) {
